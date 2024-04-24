@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="index.css" />
+    <title>Test Frontend 04-2024</title>
+  </head>
+  <body>
+    <main class="principalContainer">
+      <article class="car1">
+        <header>
+          <ul class="car1__list">
+            <li class="car1__item">
+              <span class="carValue">64<span class="carUnit">kWh</span></span>
+              <h5 class="carTitle">Batería</h5>
+            </li>
+            <li class="car1__item">
+              <span class="carValue">600<span class="carUnit">Nm</span></span>
+              <h5 class="carTitle">torque</h5>
+            </li>
+            <li class="car1__item">
+              <span class="carValue">320<span class="carUnit">kW</span></span>
+              <h5 class="carTitle">Potencia</h5>
+            </li>
+            <li class="car1__item">
+              <span class="carValue">385<span class="carUnit">km</span></span>
+              <h5 class="carTitle">autonomía máxima</h5>
+            </li>
+            <li class="car1__item">
+              <span class="carValue">3.8<span class="carUnit">s</span></span>
+              <h5 class="carTitle">aceleración (0-100 km/h)</h5>
+            </li>
+          </ul>
+          <img class="car1__logo" src="./assets/car1/car1-logo.png" alt="" />
+        </header>
+        <img class="car1__img" src="./assets/car1/car1.png" alt="" />
+      </article>
+      <article class="car2">
+        <header>
+          <ul class="car2__list">
+            <li class="car2__item">
+              <span class="carValue">77<span class="carUnit">kWh</span></span>
+              <h5 class="carTitle">Batería</h5>
+            </li>
+            <li class="car2__item">
+              <span class="carValue">350<span class="carUnit">Nm</span></span>
+              <h5 class="carTitle">torque</h5>
+            </li>
+            <li class="car2__item">
+              <span class="carValue">180<span class="carUnit">kW</span></span>
+              <h5 class="carTitle">Potencia</h5>
+            </li>
+            <li class="car2__item">
+              <span class="carValue">520<span class="carUnit">km</span></span>
+              <h5 class="carTitle">autonomía máxima</h5>
+            </li>
+            <li class="car2__item">
+              <span class="carValue">6.5<span class="carUnit">s</span></span>
+              <h5 class="carTitle">aceleración (0-100 km/h)</h5>
+            </li>
+          </ul>
+          <img class="car2__logo" src="./assets/car2/car2-logo.png" alt="" />
+        </header>
+        <img class="car2__img" src="./assets/car2/car2.png" alt="" />
+      </article>
+
+      <input
+        type="range"
+        min="0"
+        max="100"
+        value="50"
+        aria-label="Percentage of before photo shown"
+        class="slider"
+      />
+      <div class="slider-line" aria-hidden="true"></div>
+      <div class="slider-button" aria-hidden="true"></div>
+    </main>
+  </body>
+  <script>
+    const $container = document.querySelector(".principalContainer");
+    document.querySelector(".slider").addEventListener("input", (e) => {
+      $container.style.setProperty("--position", `${e.target.value}%`);
+    });
+  </script>
+</html>

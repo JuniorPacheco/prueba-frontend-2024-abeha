@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="index.css" />
+    <title>Test Frontend 04-2024</title>
+  </head>
+  <body>
+    <main class="principalContainer">
+      <article class="car1"></article>
+      <article class="car2"></article>
+
+      <input
+        type="range"
+        min="0"
+        max="100"
+        value="50"
+        aria-label="Percentage of before photo shown"
+        class="slider"
+      />
+      <div class="slider-line" aria-hidden="true"></div>
+      <div class="slider-button" aria-hidden="true"></div>
+    </main>
+  </body>
+  <script>
+    const $container = document.querySelector(".principalContainer");
+    document.querySelector(".slider").addEventListener("input", (e) => {
+      $container.style.setProperty("--position", `${e.target.value}%`);
+    });
+  </script>
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css"
+    />
+    <title>Results</title>
+  </head>
+  <body style="padding: 20px">
+    <h1>Resultados Musicales</h1>
+
+    <h3>Mejores en ventas</h3>
+    <ul class="bestSellers"></ul>
+
+    <h3>Total de ventas</h3>
+    <p class="totalSales"></p>
+
+    <h3>Nombres largos</h3>
+    <ul class="longNames"></ul>
+
+    <form class="artistForm">
+      <h3>Busca información de un artista</h3>
+      <label for="artistName">Nombre del artista</label>
+      <input type="text" name="artistName" />
+    </form>
+
+    <span class="artistSearch"></span>
+    <script>
+      const $bestSellers = document.querySelector(".bestSellers");
+      const $totalSales = document.querySelector(".totalSales");
+      const $longNames = document.querySelector(".longNames");
+      const $artistForm = document.querySelector(".artistForm");
+      const $artistSearch = document.querySelector(".artistSearch");
+
+      let musicData = [
+        { artist: "Adele", name: "25", sales: 1731000 },
+        { artist: "Drake", name: "Views", sales: 1608000 },
+        { artist: "Beyonce", name: "Lemonade", sales: 1554000 },
+        { artist: "Chris Stapleton", name: "Traveller", sales: 1085000 },
+        { artist: "Pentatonix", name: "A Pentatonix Christmas", sales: 904000 },
+        {
+          artist: "Original Broadway Cast Recording",
+          name: "Hamilton: An American Musical",
+          sales: 820000,
+        },
+        { artist: "Twenty One Pilots", name: "Blurryface", sales: 738000 },
+        { artist: "Prince", name: "The Very Best of Prince", sales: 668000 },
+        { artist: "Rihanna", name: "Anti", sales: 603000 },
+        { artist: "Justin Bieber", name: "Purpose", sales: 554000 },
+      ];
+
+      $artistForm.addEventListener("submit", (event) => {
+        event.preventDefault();
+        const artistName = event.target.artistName.value;
+        const artist = searchArtistInfo(artistName);
+        if(!artist) $artistSearch.innerHTML = `No se ha encontrado el artista ${artistName}`;
+        $artistSearch.innerHTML = `El álbum ${artist.name} del artista ${artist.artist} vendió aproximadamente ${artist.sales} copias`;
+        
+      });
+
+      const renderInfo = () => {
+        const bestSellingAlbums = musicData.filter(
+          (album) => album.sales > 1000000
+        );
+
+        const totalAlbumSales = bestSellingAlbums.reduce(
+          (sum, album) => sum + album.sales,
+          0
+        );
+
+        const longNames = musicData.filter((album) => {
+          const namesWithoutSpaces = album.name.split(" ").join("");
+          return namesWithoutSpaces.length > 8;
+        });
+
+        $bestSellers.innerHTML = bestSellingAlbums.reduce((acc, album) => {
+          return acc + `<li>${album.artist} es un gran artista</li>`;
+        }, "");
+
+        $totalSales.innerHTML = `Total de ventas: ${totalAlbumSales}`;
+
+        $longNames.innerHTML = longNames.reduce((acc, album) => {
+          return acc + `<li>${album.artist} tiene un nombre muy grande</li>`;
+        }, "");
+      };
+
+      renderInfo();
+
+      const addArtistInfo = ({ artist, name, sales }) => {
+        musicData.push({ artist, name, sales });
+        renderInfo();
+      };
+
+      const deleteArtistInfo = (artistName) => {
+        musicData = musicData.filter((album) => album.artist !== artistName);
+        renderInfo();
+      };
+
+      const searchArtistInfo = (artistName) => {
+        const artist = musicData.find(
+          (album) => album.artist.toLowerCase() === artistName.toLowerCase()
+        );
+        return artist;
+      };
+
+      addArtistInfo({
+        artist: "Radiohead",
+        name: "Ok Computer",
+        sales: 5000000,
+      });
+
+      deleteArtistInfo("Adele");
+      deleteArtistInfo("Prince");
+      deleteArtistInfo("Justin Bieber");
+    </script>
+  </body>
+</html>
